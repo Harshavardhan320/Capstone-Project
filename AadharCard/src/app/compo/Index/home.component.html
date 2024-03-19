@@ -1,0 +1,54 @@
+<div class="row">
+      <div class="col-3">
+            <h1>Log In</h1>
+      </div>
+      <div class="col-6"></div>
+      <div class="col-3"></div><br><hr>
+</div>
+<div class="row">
+      <div class="col-2">
+            <span *ngIf="[message] !== null" style="color:crimson">{{message}}</span>
+      </div>
+      <div class="col-4">
+            <form #loginform="ngForm" (ngSubmit)="submit(loginform)">
+                  <div class="form-group">
+                        <label for="SelectRol"><b>Select Rol:</b>
+                              <select name="rol" class="form-control" #select="ngModel" ngModel>
+                                    <option value="">--</option>
+                                    <option value="citizen">Citizen Login</option>
+                                    <option value="admin">Admin</option>
+                              </select>
+                              <div *ngIf="select.errors && select.touched">
+                                    <span  *ngIf="select.validator">Select The Rol. </span>
+                              </div>
+                        </label>
+                  </div><br>
+                  <div class="form-group">
+                        <label for="UserId"><b>User Id*</b>
+                              <input type="text" placeholder="Enter User ID" name="userid"
+                               required class="form-control" ngModel #username="ngModel"
+                               minlength="5"/>
+                               <div *ngIf="username.errors && username.touched">
+                                    <span *ngIf="username.errors?.['required']">Enter Username</span>
+                                    <span *ngIf="username.errors?.['minlength']">Must Have 5 Characters</span>
+                              </div>
+                        </label>
+                  </div><br>
+                  <div class="form-group">
+                        <label for="password"><b>Password*</b>
+                              <input type="password" placeholder="password" name="password" required class="form-control"
+                              ngModel #password="ngModel"/>
+                              <div *ngIf="password.errors && password.touched">
+                                    <span *ngIf="password.errors?.['required']">Enter password</span>
+                              </div>
+                        </label>
+                  </div><br>
+                 <div class="form-group">
+                        <button class="btn btn-outline-success"  [disabled]="loginform.invalid">Login</button>
+                 </div>
+            </form>
+      </div>
+      <div class="col-6">
+            <a routerLink="/register">Register</a>
+      </div>
+</div>
